@@ -3,32 +3,31 @@
 #include "Brick.h"
 #include "Ball.h"
 
-class Bricks : public Brick    
+class Bricks : public Brick   
 {
 private:
-    std::vector<Brick> bloki;  // tablica cegie³
-    float rozmiarX;
-    float rozmiarY;
+    std::vector<Brick> bloki;
+    float rozmiarX{};
+    float rozmiarY{};
 
 public:
-
     Bricks()
-        : Brick({ 0.f,0.f }, { 0.f,0.f }, 0)   // wywo³anie tworzenia Brick
+        : Brick({ 0.f, 0.f }, { 0.f, 0.f }, 0)   
     {
     }
 
+    // tworzenie siatki bloczków
     void initGrid(int kolumny, int wiersze, float szerokoscOkna)
     {
         bloki.clear();
 
-        // wyliczanie rozmiaru bloczków
         float odstep = 2.f;
         rozmiarX = (szerokoscOkna - (kolumny - 1) * odstep) / kolumny;
         rozmiarY = 20.f;
 
-        for (int y = 0; y < wiersze; y++)
+        for (int y = 0; y < wiersze; ++y)
         {
-            for (int x = 0; x < kolumny; x++)
+            for (int x = 0; x < kolumny; ++x)
             {
                 float posX = x * (rozmiarX + odstep);
                 float posY = y * (rozmiarY + odstep) + 60.f;
@@ -46,9 +45,10 @@ public:
         }
     }
 
+    // kolizje z pi³k¹ + usuwanie zniszczonych
     void update(Ball& pilka)
     {
-        // kolizje z pi³k¹
+        // kolizje
         for (auto& blk : bloki)
         {
             if (!blk.czyZniszczony() &&
@@ -60,18 +60,17 @@ public:
         }
 
         // usuwanie zniszczonych
-        for (int i = static_cast<int>(bloki.size()) - 1; i >= 0; i--)
+        for (int i = static_cast<int>(bloki.size()) - 1; i >= 0; --i)
         {
             if (bloki[i].czyZniszczony())
                 bloki.erase(bloki.begin() + i);
         }
     }
 
+    // rysowanie wszystkich bloczków
     void draw(sf::RenderTarget& window)
     {
         for (auto& blk : bloki)
             blk.draw(window);
     }
 };
-
-

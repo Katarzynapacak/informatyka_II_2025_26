@@ -1,67 +1,76 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <array>   // prosta tablica sta³ego rozmiaru
+#include <array>
 
-class Brick : public sf::RectangleShape {
+class Brick
+{
 private:
-    int punktyZycia;       // 0–3
-    bool jestZniszczony;   // jeœli zniszczony to = true
+    sf::RectangleShape m_shape;
+    int  m_zycie;
+    bool m_zniszczony;
 
-    // tablica kolorów zale¿nych od ¿ycia
-    static const std::array<sf::Color, 4> colorLUT;
+    static const std::array<sf::Color, 4>& colorLUT()
+    {
+        static const std::array<sf::Color, 4> lut = {
+            sf::Color::Transparent, 
+            sf::Color::Yellow,      
+            sf::Color::Magenta,     
+            sf::Color::Red          
+        };
+        return lut;
+    }
+
+    void aktualizujKolor()
+    {
+        int idx = m_zycie;
+        if (idx < 0) idx = 0;
+        if (idx > 3) idx = 3;
+
+        m_shape.setFillColor(colorLUT()[idx]);
+    }
 
 public:
-    Brick(sf::Vector2f startPo, sf::Vector2f rozmiar, int L);
+    Brick(sf::Vector2f startPo, sf::Vector2f rozmiar, int L)
+        : m_shape(rozmiar),
+        m_zycie(L),
+        m_zniszczony(false)
+    {
+        m_shape.setPosition(startPo);
+        m_shape.setOrigin(rozmiar.x / 2.f, rozmiar.y / 2.f);
+        m_shape.setOutlineColor(sf::Color::White);
+        m_shape.setOutlineThickness(1.f);
+        aktualizujKolor();
+    }
 
-    void aktualizujKolor();              // zmienia kolor klocka w zale¿noœci od punktyZycia
-    void trafienie();                    // zmniejsza ¿ycie i ustawia kolor
-    void draw(sf::RenderTarget& window); // rysuje klocek
-    bool czyZniszczony() { return jestZniszczony; }
+    void draw(sf::RenderTarget& window)
+    {
+        window.draw(m_shape);
+    }
+
+    sf::FloatRect getGlobalBounds() const
+    {
+        return m_shape.getGlobalBounds();
+    }
+
+    bool czyZniszczony() const
+    {
+        return m_zniszczony;
+    }
+
+    void trafienie()
+    {
+        if (m_zniszczony)
+            return;
+
+        if (m_zycie > 0)
+            m_zycie--;
+
+        if (m_zycie <= 0)
+        {
+            m_zycie = 0;
+            m_zniszczony = true;
+        }
+
+        aktualizujKolor();
+    }
 };
-
-Brick::Brick(sf::Vector2f startPo, sf::Vector2f rozmiar, int L)
-{
-    punktyZycia = L;         // liczba ¿yæ
-    jestZniszczony = false;  
-
-    this->setPosition(startPo);
-    this->setSize(rozmiar);
-
-    this->setFillColor(sf::Color::Yellow);
-    this->setOutlineColor(sf::Color::White);
-    this->setOutlineThickness(1.f);
-
-    aktualizujKolor();
-}
-
-const std::array<sf::Color, 4> Brick::colorLUT = {
-    sf::Color::Transparent,
-    sf::Color::Yellow,
-    sf::Color::Magenta,
-    sf::Color::Red
-};
-
-void Brick::trafienie()
-{
-    if (jestZniszczony == true)
-        return; 
-
-    punktyZycia--;
-    aktualizujKolor();
-
-    if (punktyZycia <= 0)
-        jestZniszczony = true;
-}
-
-void Brick::aktualizujKolor()
-{
-    if (punktyZycia >= 0 && punktyZycia <= 3)
-        this->setFillColor(colorLUT[punktyZycia]);
-}
-
-void Brick::draw(sf::RenderTarget& window)
-{
-    window.draw(*this);
-}
-
-
