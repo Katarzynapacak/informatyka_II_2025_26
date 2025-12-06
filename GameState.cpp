@@ -35,16 +35,16 @@ bool GameState::saveToFile(const std::string& filename) const
     if (!file.is_open())
         return false;
 
-    // paddle
+    // pozycja paletki
     file << "PADDLE "
         << m_paddlePos.x << " " << m_paddlePos.y << "\n";
 
-    // ball
+    // pozycja pilki
     file << "BALL "
         << m_ballPos.x << " " << m_ballPos.y << " "
         << m_ballVel.x << " " << m_ballVel.y << "\n";
 
-    // bricks
+    // rozmiar i stan bloczkow
     file << "BLOCKS_COUNT " << m_blocks.size() << "\n";
 
     for (const auto& b : m_blocks)

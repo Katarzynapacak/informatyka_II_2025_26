@@ -24,24 +24,21 @@ public:
     {
         window.draw(m_shape);
     }
-
-    void ruch(sf::Time dt, sf::Vector2f windowWH)
+    
+    void ruch(sf::Time dt, sf::Vector2f windowWH)// ruch 
     {
-        // left
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) ||
             sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
             m_shape.move(-velocity.x * dt.asSeconds(), 0.f);
         }
 
-        // right
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) ||
             sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
             m_shape.move(velocity.x * dt.asSeconds(), 0.f);
         }
 
-        // keep in window
         sf::Vector2f pos = m_shape.getPosition();
         sf::Vector2f size = m_shape.getSize();
         float halfW = size.x / 2.f;

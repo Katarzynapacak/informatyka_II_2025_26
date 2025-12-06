@@ -12,7 +12,6 @@ Game::Game()
         sf::Vector2f(-300.f, -300.f)
     )
 {
-    // konfiguracja gwiazdy jest w konstruktorze Star
     reset();
 }
 
@@ -29,7 +28,7 @@ void Game::reset()
     m_bricks.initGrid(ILOSC_KOLUMN, ILOSC_WIERSZY, static_cast<float>(SZEROKOSC));
     m_bricks.resetFirstCollision();
 
-    // gwiazda na srodku ekranu, widoczna na starcie
+    // gwiazda na srodku ekranu na poczatku gry
     m_star.setPosition(
         sf::Vector2f(
             static_cast<float>(SZEROKOSC) / 2.f,
@@ -50,7 +49,7 @@ void Game::update(sf::Time dt)
         )
     );
 
-    // ruch pilki + kolizja z paletka i scianami
+    // ruch pilki, kolizja z paletka i scianami
     m_pilka.ruch(
         dt,
         sf::Vector2f(
@@ -63,7 +62,7 @@ void Game::update(sf::Time dt)
     // kolizje pilki z bloczkami
     m_bricks.update(m_pilka, dt);
 
-    // po pierwszej kolizji chowamy gwiazde
+    // po pierwszej kolizji znika gwiazda
     if (m_bricks.hasFirstCollision())
         m_star.hide();
 }
@@ -79,7 +78,5 @@ void Game::render(sf::RenderTarget& target)
     m_paletka.draw(target);
     m_pilka.draw(target);
     m_bricks.draw(target);
-
-    // gwiazda jako osobny obiekt
     m_star.draw(target);
 }

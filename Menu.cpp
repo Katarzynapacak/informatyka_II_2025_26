@@ -6,10 +6,9 @@ Menu::Menu(float width, float height)
 
     if (!m_font.loadFromFile("C:\\Windows\\Fonts\\arial.ttf"))
     {
-        // blad ladowania czcionki
     }
 
-    // 0 - Nowa gra
+    // Nowa gra
     m_items[0].setFont(m_font);
     m_items[0].setFillColor(sf::Color::Cyan);
     m_items[0].setString("Nowa gra");
@@ -18,7 +17,7 @@ Menu::Menu(float width, float height)
         sf::Vector2f(width / 3.f, height / (MAX_LICZBA_POZIOMOW + 1.f) * 1.f)
     );
 
-    // 1 - Wczytaj gre
+    // Wczytaj gre
     m_items[1].setFont(m_font);
     m_items[1].setFillColor(sf::Color::White);
     m_items[1].setString("Wczytaj gre");
@@ -27,7 +26,7 @@ Menu::Menu(float width, float height)
         sf::Vector2f(width / 3.f, height / (MAX_LICZBA_POZIOMOW + 1.f) * 2.f)
     );
 
-    // 2 - Ostatnie wyniki
+    // Ostatnie wyniki
     m_items[2].setFont(m_font);
     m_items[2].setFillColor(sf::Color::White);
     m_items[2].setString("Ostatnie wyniki");
@@ -36,7 +35,7 @@ Menu::Menu(float width, float height)
         sf::Vector2f(width / 3.f, height / (MAX_LICZBA_POZIOMOW + 1.f) * 3.f)
     );
 
-    // 3 - Wyjscie
+    // Wyjscie
     m_items[3].setFont(m_font);
     m_items[3].setFillColor(sf::Color::White);
     m_items[3].setString("Wyjscie");

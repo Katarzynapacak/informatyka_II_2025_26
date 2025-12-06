@@ -4,7 +4,6 @@
 #include <sstream>
 #include <vector>
 #include <cmath>
-
 #include "Menu.h"
 #include "Game.h"
 #include "GameState.h"
@@ -16,7 +15,6 @@ struct ScoreBoard
     bool load(const std::string& filename)
     {
         entries.clear();
-
         std::ifstream file(filename);
         if (!file.is_open())
             return false;
@@ -95,8 +93,8 @@ int main()
     );
     window.setFramerateLimit(60);
 
-    Menu      menu(window.getSize().x, window.getSize().y);
-    Game      game;
+    Menu menu(window.getSize().x, window.getSize().y);
+    Game game;
     GameState snapshot;
     ScoreBoard scoreBoard;
     scoreBoard.load(SCORE_FILE);

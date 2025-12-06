@@ -2,7 +2,6 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <string>
-
 #include "Paddle.h"
 #include "Ball.h"
 #include "Brick.h"
@@ -14,7 +13,7 @@ struct BlockData
     float y;
     float w;
     float h;
-    int   hp;
+    int hp;
 };
 
 class GameState

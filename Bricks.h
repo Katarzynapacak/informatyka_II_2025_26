@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
-
 #include "Brick.h"
 #include "Ball.h"
 
@@ -12,8 +11,7 @@ private:
     float rozmiarX{};
     float rozmiarY{};
     int   m_poczatkowaLiczba{};
-
-    bool  m_firstCollision = false; // first ball-block collision in this run
+    bool  m_firstCollision = false; 
 
 public:
     const std::vector<Brick>& getVector() const { return bloki; }
@@ -30,7 +28,7 @@ public:
 
     Bricks() = default;
 
-    // create grid of bricks
+    // bloczki
     void initGrid(int kolumny, int wiersze, float szerokoscOkna)
     {
         bloki.clear();
@@ -62,7 +60,7 @@ public:
         }
     }
 
-    // collisions with ball + removing destroyed bricks
+    // kolizja i usuwanie
     void update(Ball& pilka, sf::Time dt)
     {
         (void)dt;

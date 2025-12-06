@@ -5,16 +5,15 @@ class Star
 {
 private:
     sf::CircleShape m_shape;
-    bool            m_visible;
+    bool m_visible;
 
 public:
     Star()
         : m_shape(), m_visible(false)
     {
         m_shape.setRadius(15.f);
-        m_shape.setPointCount(5);       // wyglada jak gwiazdka
         m_shape.setOrigin(15.f, 15.f);
-        m_shape.setFillColor(sf::Color::Yellow); // zolty kolor
+        m_shape.setFillColor(sf::Color::Yellow); 
     }
 
     void setPosition(const sf::Vector2f& pos)

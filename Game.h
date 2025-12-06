@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
 #include "Paddle.h"
 #include "Ball.h"
 #include "Brick.h"
@@ -13,10 +12,10 @@ public:
     Game();
 
     const Paddle& getPaddle() const { return m_paletka; }
-    const Ball& getBall()   const { return m_pilka; }
+    const Ball& getBall() const { return m_pilka; }
     const std::vector<Brick>& getBlocks() const { return m_bricks.getVector(); }
     int  getDestroyedBricks() const { return m_bricks.getDestroyedCount(); }
-    int  getInitialBricks()   const { return m_bricks.getInitialCount(); }
+    int  getInitialBricks() const { return m_bricks.getInitialCount(); }
     bool isBallOutOfBounds(float windowHeight) const;
 
     Paddle& getPaddle() { return m_paletka; }
@@ -29,10 +28,9 @@ public:
 
 private:
     Paddle m_paletka;
-    Ball   m_pilka;
+    Ball m_pilka;
     Bricks m_bricks;
-
-    Star   m_star; // osobny obiekt gwiazdy
+    Star m_star; 
 
     static constexpr int SZEROKOSC = 800;
     static constexpr int WYSOKOSC = 600;
