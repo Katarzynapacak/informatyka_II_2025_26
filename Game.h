@@ -7,18 +7,21 @@
 class Game
 {
 public:
+    const Paddle& getPaddle() const { return m_paletka; }
+    const Ball& getBall()   const { return m_pilka; }
+    const std::vector<Brick>& getBlocks() const { return m_bricks.getVector(); }
+
+    Paddle& getPaddle() { return m_paletka; }
+    Ball& getBall() { return m_pilka; }
+    Bricks& getBricks() { return m_bricks; }
+
+
     Game();
-    void run();
 
-private:
-    void processEvents();
     void update(sf::Time dt);
-    void render();
+    void render(sf::RenderTarget& target);
 
 private:
-    sf::RenderWindow m_window;
-    sf::Clock        m_deltaClock;
-
     Paddle m_paletka;
     Ball   m_pilka;
     Bricks m_bricks;

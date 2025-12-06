@@ -8,6 +8,9 @@ private:
     sf::Vector2f       velocity{ 200.f, 0.f };
 
 public:
+    sf::Vector2f getPosition() const { return m_shape.getPosition(); }
+    void setPosition(const sf::Vector2f& pos) { m_shape.setPosition(pos); }
+
     Paddle(sf::Vector2f startPos, sf::Vector2f rozmiar, sf::Vector2f startVel)
     {
         velocity = startVel;

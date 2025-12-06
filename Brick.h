@@ -30,6 +30,9 @@ private:
     }
 
 public:
+    sf::Vector2f getPosition() const { return m_shape.getPosition(); }
+    int getHP() const { return m_zycie; }
+
     Brick(sf::Vector2f startPo, sf::Vector2f rozmiar, int L)
         : m_shape(rozmiar),
         m_zycie(L),

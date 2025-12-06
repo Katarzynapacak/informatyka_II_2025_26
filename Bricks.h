@@ -11,6 +11,10 @@ private:
     float rozmiarY{};
 
 public:
+public:
+    const std::vector<Brick>& getVector() const { return bloki; }
+    std::vector<Brick>& getVectorRef() { return bloki; }
+
     Bricks()
         : Brick({ 0.f, 0.f }, { 0.f, 0.f }, 0)   
     {
