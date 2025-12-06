@@ -12,7 +12,9 @@ struct BlockData
 {
     float x;
     float y;
-    int hp;
+    float w;
+    float h;
+    int   hp;
 };
 
 class GameState
@@ -27,18 +29,13 @@ private:
 public:
     GameState() = default;
 
-    // zrzut stanu gry
     void capture(const Paddle& paddle,
         const Ball& ball,
         const std::vector<Brick>& blocks);
 
-    // zapis do pliku
     bool saveToFile(const std::string& filename) const;
-
-    // odczyt z pliku
     bool loadFromFile(const std::string& filename);
 
-    // przepisanie stanu do obiektów gry
     void apply(Paddle& paddle,
         Ball& ball,
         Bricks& bricks);

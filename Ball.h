@@ -6,7 +6,7 @@ class Ball
 {
 private:
     sf::CircleShape m_shape;
-    sf::Vector2f m_velocity;
+    sf::Vector2f    m_velocity;
 
 public:
     Ball(const sf::Vector2f& startPos, float radius, const sf::Vector2f& startVel)
@@ -18,7 +18,7 @@ public:
         m_shape.setFillColor(sf::Color::White);
     }
 
-    // RUCH PILKI 
+    // move ball
     void ruch(sf::Time dt, const sf::Vector2f& windowWH, Paddle& pad)
     {
         m_shape.move(m_velocity * dt.asSeconds());
@@ -27,38 +27,36 @@ public:
         float y = m_shape.getPosition().y;
         float r = m_shape.getRadius();
 
-        // odbicia od œcian
+        // walls
         if (x - r < 0.f || x + r > windowWH.x)
             m_velocity.x = -m_velocity.x;
 
         if (y - r < 0.f)
             m_velocity.y = -m_velocity.y;
 
-        // odbicie od paletki
+        // paddle
         if (m_shape.getGlobalBounds().intersects(pad.getGlobalBounds()))
         {
             m_velocity.y = -m_velocity.y;
         }
     }
 
-    //  RYSOWANIE 
     void draw(sf::RenderTarget& window)
     {
         window.draw(m_shape);
     }
 
-    //  ODBICIE W PIONIE 
     void odbijY()
     {
         m_velocity.y = -m_velocity.y;
     }
 
-    //  GETTERY DO GAMESTATE
-    sf::Vector2f getPosition() const { return m_shape.getPosition(); }
-    sf::Vector2f getVelocity() const { return m_velocity; }
+    // getters
+    sf::Vector2f  getPosition()     const { return m_shape.getPosition(); }
+    sf::Vector2f  getVelocity()     const { return m_velocity; }
     sf::FloatRect getGlobalBounds() const { return m_shape.getGlobalBounds(); }
 
-    //  SETTERY DO GAMESTATE 
+    // setters
     void setPosition(const sf::Vector2f& pos) { m_shape.setPosition(pos); }
     void setVelocity(const sf::Vector2f& vel) { m_velocity = vel; }
 };

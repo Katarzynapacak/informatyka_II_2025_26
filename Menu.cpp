@@ -6,11 +6,8 @@ Menu::Menu(float width, float height)
 
     if (!m_font.loadFromFile("C:\\Windows\\Fonts\\arial.ttf"))
     {
-       
+        // blad ladowania czcionki
     }
-
-
-    // Ustawienie wygl¹du elementów menu 
 
     // 0 - Nowa gra
     m_items[0].setFont(m_font);
@@ -47,7 +44,6 @@ Menu::Menu(float width, float height)
     m_items[3].setPosition(
         sf::Vector2f(width / 3.f, height / (MAX_LICZBA_POZIOMOW + 1.f) * 4.f)
     );
-
 }
 
 void Menu::draw(sf::RenderWindow& window)
@@ -60,7 +56,6 @@ void Menu::draw(sf::RenderWindow& window)
 
 void Menu::moveUp()
 {
-    // odznacz aktualny
     m_items[m_selectedIndex].setFillColor(sf::Color::White);
     m_items[m_selectedIndex].setStyle(sf::Text::Regular);
 
@@ -68,14 +63,12 @@ void Menu::moveUp()
     if (m_selectedIndex < 0)
         m_selectedIndex = MAX_LICZBA_POZIOMOW - 1;
 
-    // zaznacz nowy
     m_items[m_selectedIndex].setFillColor(sf::Color::Cyan);
     m_items[m_selectedIndex].setStyle(sf::Text::Bold);
 }
 
 void Menu::moveDown()
 {
-    // odznacz aktualny
     m_items[m_selectedIndex].setFillColor(sf::Color::White);
     m_items[m_selectedIndex].setStyle(sf::Text::Regular);
 
@@ -83,8 +76,6 @@ void Menu::moveDown()
     if (m_selectedIndex >= MAX_LICZBA_POZIOMOW)
         m_selectedIndex = 0;
 
-    // zaznacz nowy
     m_items[m_selectedIndex].setFillColor(sf::Color::Cyan);
     m_items[m_selectedIndex].setStyle(sf::Text::Bold);
 }
-

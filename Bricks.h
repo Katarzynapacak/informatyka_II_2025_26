@@ -1,33 +1,46 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 #include <vector>
+
 #include "Brick.h"
 #include "Ball.h"
 
-class Bricks : public Brick   
+class Bricks
 {
 private:
     std::vector<Brick> bloki;
     float rozmiarX{};
     float rozmiarY{};
+    int   m_poczatkowaLiczba{};
 
-public:
+    bool  m_firstCollision = false; // first ball-block collision in this run
+
 public:
     const std::vector<Brick>& getVector() const { return bloki; }
     std::vector<Brick>& getVectorRef() { return bloki; }
 
-    Bricks()
-        : Brick({ 0.f, 0.f }, { 0.f, 0.f }, 0)   
+    int getDestroyedCount() const
     {
+        return m_poczatkowaLiczba - static_cast<int>(bloki.size());
     }
 
-    // tworzenie siatki bloczków
+    int  getInitialCount()   const { return m_poczatkowaLiczba; }
+    bool hasFirstCollision() const { return m_firstCollision; }
+    void resetFirstCollision() { m_firstCollision = false; }
+
+    Bricks() = default;
+
+    // create grid of bricks
     void initGrid(int kolumny, int wiersze, float szerokoscOkna)
     {
         bloki.clear();
+        m_firstCollision = false;
 
         float odstep = 2.f;
         rozmiarX = (szerokoscOkna - (kolumny - 1) * odstep) / kolumny;
         rozmiarY = 20.f;
+
+        m_poczatkowaLiczba = kolumny * wiersze;
 
         for (int y = 0; y < wiersze; ++y)
         {
@@ -49,10 +62,11 @@ public:
         }
     }
 
-    // kolizje z pi³k¹ + usuwanie zniszczonych
-    void update(Ball& pilka)
+    // collisions with ball + removing destroyed bricks
+    void update(Ball& pilka, sf::Time dt)
     {
-        // kolizje
+        (void)dt;
+
         for (auto& blk : bloki)
         {
             if (!blk.czyZniszczony() &&
@@ -60,10 +74,12 @@ public:
             {
                 blk.trafienie();
                 pilka.odbijY();
+
+                if (!m_firstCollision)
+                    m_firstCollision = true;
             }
         }
 
-        // usuwanie zniszczonych
         for (int i = static_cast<int>(bloki.size()) - 1; i >= 0; --i)
         {
             if (bloki[i].czyZniszczony())
@@ -71,7 +87,6 @@ public:
         }
     }
 
-    // rysowanie wszystkich bloczków
     void draw(sf::RenderTarget& window)
     {
         for (auto& blk : bloki)

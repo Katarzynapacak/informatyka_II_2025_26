@@ -12,10 +12,10 @@ private:
     static const std::array<sf::Color, 4>& colorLUT()
     {
         static const std::array<sf::Color, 4> lut = {
-            sf::Color::Transparent, 
-            sf::Color::Yellow,      
-            sf::Color::Magenta,     
-            sf::Color::Red          
+            sf::Color::Transparent,
+            sf::Color::Yellow,
+            sf::Color::Magenta,
+            sf::Color::Red
         };
         return lut;
     }
@@ -31,7 +31,8 @@ private:
 
 public:
     sf::Vector2f getPosition() const { return m_shape.getPosition(); }
-    int getHP() const { return m_zycie; }
+    sf::Vector2f getSize()     const { return m_shape.getSize(); }
+    int          getHP()       const { return m_zycie; }
 
     Brick(sf::Vector2f startPo, sf::Vector2f rozmiar, int L)
         : m_shape(rozmiar),

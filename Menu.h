@@ -8,7 +8,7 @@ class Menu
 private:
     sf::Font m_font;
     sf::Text m_items[MAX_LICZBA_POZIOMOW];
-    int m_selectedIndex; // który element jest aktualnie wybrany
+    int      m_selectedIndex;
 
 public:
     Menu(float width, float height);
@@ -19,4 +19,3 @@ public:
 
     int getSelectedItemIndex() const { return m_selectedIndex; }
 };
-
