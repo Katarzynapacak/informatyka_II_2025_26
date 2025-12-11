@@ -254,7 +254,6 @@ int main()
                 pausedText.setCharacterSize(24);
                 pausedText.setFillColor(sf::Color::White);
 
-                // wycentrowanie na ekranie
                 sf::FloatRect bounds = pausedText.getLocalBounds();
                 pausedText.setOrigin(
                     bounds.width / 2.f,

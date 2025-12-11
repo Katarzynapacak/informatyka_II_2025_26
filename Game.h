@@ -6,6 +6,7 @@
 #include "Bricks.h"
 #include "Star.h"
 
+// glowna logika gry
 class Game
 {
 public:
@@ -28,9 +29,13 @@ public:
 
 private:
     Paddle m_paletka;
-    Ball m_pilka;
+    Ball   m_pilka;
     Bricks m_bricks;
-    Star m_star; 
+    Star   m_star;       
+
+    // licznik zbitych klockow
+    sf::Font m_font;
+    sf::Text m_brickCounterText;
 
     static constexpr int SZEROKOSC = 800;
     static constexpr int WYSOKOSC = 600;
